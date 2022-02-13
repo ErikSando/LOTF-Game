@@ -1,0 +1,37 @@
+HOW TO MAKE MODS
+
+* If you have experience with Python, you don't need to read this unless you want ideas
+
+Start with "import pygame, game" - this lets you run pygame stuff and access game variables
+
+Some variables you can change:
+- fps (integer)
+- bg (array with 3 integers i.e. [50, 150, 250])
+- screen_size (array with 2 integers i.e. [800, 500]) WARNING: editing this will make the game weird
+
+How to edit the world/player:
+- The player class takes 7 variables (x, y, sprites, defence, attack, speed, jump power). The default values
+  are: x = 50, y = 50, sprites = playerSprites, defence = 100, attack = 10, speed = 5, jump power = 12
+ Examples:
+ - You could increase the players speed to 10 and jump power to 30 with "player = Player(50, 50, playerSprites, 100, 10, 10, 30)"
+ - You could change the sprites with the following lines of code seperated with a semi-colon (;):
+   import pygame, game, sprites; sprites.playerSprites = *sprites object*; game._player = Player(50, 50, playerSprites, 100, 10, 5, 12)
+   The player sprites object must be formatted the same as the other sprites objects, like the following:
+   sprites_object = {
+       'left': {
+            'idle': pygame.image.load('image path'),
+            'run': [
+                pygame.image.load('image path'),
+                pygame.image.load('image path')
+            ]
+       },
+       'right': {
+           'idle': pygame.image.load('image path'),
+           'run': [
+               pygame.image.load('image path'),
+               pygame.image.load('image path')
+           ]
+        }
+    }
+
+* If the game crashes/is frozen when you open it, you've made a mistake with the mod code.

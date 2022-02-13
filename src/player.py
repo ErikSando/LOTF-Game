@@ -4,24 +4,6 @@ import pygame
 # Initialise pygame
 pygame.init()
 
-# Load character sprites
-sprites = {
-    'left': {
-        'idle': pygame.transform.scale(pygame.image.load('assets/sprites/rightIdle.png'), (36, 96)),
-        'run': [
-            pygame.transform.scale(pygame.image.load('assets/sprites/rightIdle.png'), (36, 96)),
-            pygame.transform.scale(pygame.image.load('assets/sprites/rightIdle.png'), (36, 96))
-        ]
-    },
-    'right': {
-        'idle': pygame.transform.scale(pygame.image.load('assets/sprites/rightIdle.png'), (36, 96)),
-        'run': [
-            pygame.transform.scale(pygame.image.load('assets/sprites/rightIdle.png'), (36, 96)),
-            pygame.transform.scale(pygame.image.load('assets/sprites/rightIdle.png'), (36, 96))
-        ]
-    }
-}
-
 run = 0
 
 class Player:
@@ -88,22 +70,26 @@ class Player:
         # Collision detection
         for tile in world.tiles:
             # Collision in X axis
-            if tile[1].colliderect(self.rect.x + self.dx, self.rect.y, 36, 92):
+            tileRect = tile[1].copy()
+            tileRect.x -= world.cameraOffset[0]
+            tileRect.y -= world.cameraOffset[1]
+
+            if tileRect.colliderect(self.rect.x + self.dx, self.rect.y, 36, 92):
                 self.dx = 0
 
             # Collision in Y axis
-            if tile[1].colliderect(self.rect.x, self.rect.y + self.dy, 36, 92):
+            if tileRect.colliderect(self.rect.x, self.rect.y + self.dy, 36, 92):
                 if self.gravity < 0:
                     self.gravity = 0
-                    self.dy = tile[1].bottom - self.rect.top
+                    self.dy = tileRect.bottom - self.rect.top
 
                 elif self.gravity >= 0:
                     self.grounded = True
                     self.gravity = 0
-                    self.dy = tile[1].top - self.rect.bottom
+                    self.dy = tileRect.top - self.rect.bottom
 
         # Update coords
-        self.rect.x += self.dx
+        world.cameraOffset[0] += self.dx
         self.rect.y += self.dy
 
         # Display player sprite

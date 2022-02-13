@@ -4,19 +4,20 @@ import pygame
 # Initialise pygame
 pygame.init()
 
-cameraOffset = 0
+# Variables
 tileSize = 48
 
 # Load sprites
-dirtImg = pygame.transform.scale(pygame.image.load('assets/sprites/dirt.png'), (48, 48))
-grassImg = pygame.transform.scale(pygame.image.load('assets/sprites/grass.png'), (48, 48))
+dirtImg = pygame.transform.scale(pygame.image.load('../assets/sprites/dirt.png'), (48, 48))
+grassImg = pygame.transform.scale(pygame.image.load('../assets/sprites/grass.png'), (48, 48))
 
 class World:
     def __init__(self, data):
         self.tiles = []
+        self.cameraOffset = [0, 0]
 
-        x = 1
-        y = 1
+        x = 0
+        y = 0
         
         # Create world
         for row in data:
@@ -50,4 +51,4 @@ class World:
 
     def draw(self, display):
         for tile in self.tiles:
-            display.blit(tile[0], (tile[1].x - cameraOffset, tile[1].y))
+            display.blit(tile[0], (tile[1].x - self.cameraOffset[0], tile[1].y - self.cameraOffset[1]))
