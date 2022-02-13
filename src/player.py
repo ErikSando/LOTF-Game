@@ -74,11 +74,11 @@ class Player:
             tileRect.x -= world.cameraOffset[0]
             tileRect.y -= world.cameraOffset[1]
 
-            if tileRect.colliderect(self.rect.x + self.dx, self.rect.y, 36, 92):
+            if tileRect.colliderect(self.rect.x + self.dx, self.rect.y, 36, 96):
                 self.dx = 0
 
             # Collision in Y axis
-            if tileRect.colliderect(self.rect.x, self.rect.y + self.dy, 36, 92):
+            if tileRect.colliderect(self.rect.x, self.rect.y + self.dy, 36, 96):
                 if self.gravity < 0:
                     self.gravity = 0
                     self.dy = tileRect.bottom - self.rect.top
