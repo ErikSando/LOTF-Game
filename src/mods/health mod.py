@@ -1,15 +1,13 @@
-import game, player
+import game, player, sprites
 
-print('hi')
+defence = 100 # Edit this to change player health
 
-speed = 10          # Default = 5
-jump_power = 24     # Default = 12
-
-# Get the current player values
 x = game._player.rect.x
 y = game._player.rect.y
 sprites = game._player.sprites
-_def = game._player._def
+_def = defence
 atk = game._player.atk
+speed = game._player.speed
+jump_power = game._player.jump_power
 
 game._player = player.Player(x, y, sprites, _def, atk, speed, jump_power)
