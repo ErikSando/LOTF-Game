@@ -23,7 +23,7 @@ class NPC:
     def respawn(self):
         self.alive = True
 
-    def draw(self, display, world, player):
+    def update(self, world, player):
         if not self.alive: return
 
         self.dx = 0
@@ -74,4 +74,5 @@ class NPC:
         self.rect.x += self.dx
         self.rect.y += self.dy
 
-        display.blit(self.img, (self.rect.x - world.cameraOffset, self.rect.y))
+    def draw(self, display, world):
+        display.blit(self.img, (self.rect.x - world.camera_offset[0], self.rect.y - self.camera_offset[1]))

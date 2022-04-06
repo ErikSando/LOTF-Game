@@ -18,9 +18,6 @@ playerSprites = {
 }
 
 nythanSprites = {}
-
 philSprites = {}
-
 erikSprites = {}
-
-savasSprites = {}
+savaSprites = {}

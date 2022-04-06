@@ -25,7 +25,7 @@ class Player:
         self.speed = speed
         self.jump_power = jump_power
 
-    def draw(self, display, world):
+    def update(self, world):
         # This crap changes the run sprite between two images
         self.step += 1
 
@@ -49,12 +49,12 @@ class Player:
         if key[pygame.K_a]:
             self.dx -= self.speed
             self.direction = 'left'
-            #self.img = sprites[self.direction][run][self.step]
+            # self.img = self.sprites[self.direction][self.run][self.step]
 
         if key[pygame.K_d]:
             self.dx += self.speed
             self.direction = 'right'
-            #self.img = sprites[self.direction][run][self.step]
+            # self.img = self.sprites[self.direction][self.run][self.step]
 
         if not key[pygame.K_a] and not key[pygame.K_d]:
             self.img = self.sprites[self.direction]['idle']
@@ -71,11 +71,15 @@ class Player:
         for tile in world.tiles:
             # Collision in X axis
             tileRect = tile[1].copy()
-            tileRect.x -= world.cameraOffset[0]
-            tileRect.y -= world.cameraOffset[1]
+            tileRect.x -= world.camera_offset[0]
+            tileRect.y -= world.camera_offset[1]
 
             if tileRect.colliderect(self.rect.x + self.dx, self.rect.y, 36, 96):
-                self.dx = 0
+                if self.rect.x > tileRect.x:
+                    self.dx = -(self.rect.x - (tileRect.x + world.tile_size))
+                
+                elif self.rect.x < tileRect.x:
+                    self.dx = tileRect.x - (self.rect.x + self.img.get_width())
 
             # Collision in Y axis
             if tileRect.colliderect(self.rect.x, self.rect.y + self.dy, 36, 96):
@@ -89,8 +93,9 @@ class Player:
                     self.dy = tileRect.top - self.rect.bottom
 
         # Update coords
-        world.cameraOffset[0] += self.dx
+        world.camera_offset[0] += self.dx
         self.rect.y += self.dy
 
+    def draw(self, display):
         # Display player sprite
         display.blit(self.img, self.rect)
