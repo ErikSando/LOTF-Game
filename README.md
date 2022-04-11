@@ -8,6 +8,6 @@ Made by LOTF Game team
 - Erik     (programming)
 - Eryx     (sprites or something he's done nothing yet)
 
-Lord of the Frisbees is a film franchise created by Zahran, and this game is an alternate storyline where the Dark Shadow knights have taken over the land, and the Ultra Bright knights are the rebels.
+Lord of the Frisbees is a film franchise created by someone who came up with the lord of the frisbees idea, and this game is an alternate storyline where the Dark Shadow knights have taken over the land, and the Ultra Bright knights are the rebels.
 
 The aim of the game is to save the land by defeating the Dark Shadow knights and end their reign of terror.
